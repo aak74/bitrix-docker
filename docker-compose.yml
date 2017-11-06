@@ -1,0 +1,26 @@
+version: "2"
+
+# services:
+#   bitrix:
+#     build: ./docker/bitrix
+#     networks:
+#       - bitrix
+    # volumes:
+      # - ./html:/var/www/html
+      # - ./docker/apache/php.ini:/usr/local/etc/php/php.ini
+services:
+  bx:
+    build: ./docker/bx
+    networks:
+      - bitrix
+    volumes:
+      - ./html:/home/bitrix/www
+      - ./mysql:/var/lib/mysql/
+      # - ./docker/apache/php.ini:/usr/local/etc/php/php.ini
+networks:
+  bitrix:
+      driver: bridge
+      ipam:
+          driver: default
+          config:
+              - subnet: 10.30.0.0/24
